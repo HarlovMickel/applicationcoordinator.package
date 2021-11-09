@@ -1,1 +1,3 @@
-# applicationcoordinator.package
+# ApplicationCoordinator
+
+A description of this package.
