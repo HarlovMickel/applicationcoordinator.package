@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import UIKitExtension
 
 // MARK: Router protocol
 protocol Router {
@@ -55,20 +56,6 @@ extension Router {
     static func navigationRouter(with storyboardName: String, identifier: String, bundle: Bundle? = nil) -> Routers.NavigationRouter? {
         let controller = UIStoryboard.controller(with: storyboardName, identifier: identifier, bundle: bundle) as? UINavigationController
         return controller != nil ? Routers.NavigationRouter(controller: controller!) : nil
-    }
-}
-
-// MARK: UIStoryboard (Factory)
-extension UIStoryboard {
-    
-    static func initialViewController(with storyboardName: String, bundle: Bundle? = nil) -> UIViewController? {
-        let storyboard = UIStoryboard(name: storyboardName, bundle: bundle)
-        return storyboard.instantiateInitialViewController()
-    }
-    
-    static func controller(with storyboardName: String, identifier: String, bundle: Bundle? = nil) -> UIViewController? {
-        let storyboard = UIStoryboard(name: storyboardName, bundle: bundle)
-        return storyboard.instantiateViewController(withIdentifier: identifier)
     }
 }
 

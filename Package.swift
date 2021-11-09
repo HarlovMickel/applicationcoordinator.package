@@ -13,9 +13,14 @@ let package = Package(
             name: "ApplicationCoordinator",
             targets: ["ApplicationCoordinator"])
     ],
+    dependencies: [
+        .package(url: "https://github.com/HarlovMickel/extensions.package.git", .branch("main"))
+    ],
     targets: [
         .target(
             name: "ApplicationCoordinator",
-            dependencies: [])
+            dependencies: [
+                .product(name: "Extensions", package: "extensions.package")
+            ])
     ]
 )
