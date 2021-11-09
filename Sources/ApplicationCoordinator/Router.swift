@@ -9,7 +9,7 @@ import UIKit
 import UIKitExtension
 
 // MARK: Router protocol
-protocol Router {
+public protocol Router {
     
     // MARK: Associatedtype
     associatedtype Controller: UIViewController
@@ -21,13 +21,13 @@ protocol Router {
 // MARK: Router (UIViewController)
 extension Router {
     
-    func present(controller: UIViewController, animated: Bool = true,
-                 presentationStyle: UIModalPresentationStyle = .fullScreen,
-                 completion: (() -> Void)? = nil) {
+    public func present(controller: UIViewController, animated: Bool = true,
+                        presentationStyle: UIModalPresentationStyle = .fullScreen,
+                        completion: (() -> Void)? = nil) {
         controller.modalPresentationStyle = presentationStyle
         self.controller.present(controller, animated: animated, completion: completion)
     }
-    func dismiss(animated: Bool = true, completion: (() -> Void)? = nil) {
+    public func dismiss(animated: Bool = true, completion: (() -> Void)? = nil) {
         controller.dismiss(animated: animated, completion: completion)
     }
 }
@@ -35,12 +35,12 @@ extension Router {
 // MARK: Router (Factory)
 extension Router {
     
-    static func rootRouter<Controller>(controller: Controller) -> Routers.RootRouter<Controller>
+    public static func rootRouter<Controller>(controller: Controller) -> Routers.RootRouter<Controller>
     where Controller: UIViewController {
         Routers.RootRouter(controller: controller)
     }
     
-    static func navigationRouter(controller: UINavigationController) -> Routers.NavigationRouter {
+    public static func navigationRouter(controller: UINavigationController) -> Routers.NavigationRouter {
         Routers.NavigationRouter(controller: controller)
     }
 }
@@ -60,13 +60,13 @@ extension Router {
 }
 
 // MARK: Routers namespace
-enum Routers {
+public enum Routers {
     
     // MARK: RootRouter implementation
-    struct RootRouter<Controller: UIViewController>: Router {
+    public struct RootRouter<Controller: UIViewController>: Router {
         
         // MARK: Properties
-        let controller: Controller
+        public let controller: Controller
         
         // MARK: Public methods
         func run() {
@@ -77,22 +77,22 @@ enum Routers {
     }
     
     // MARK: NavigationRouter implementation
-    struct NavigationRouter: Router {
+    public struct NavigationRouter: Router {
         
         // MARK: Properties
-        let controller: UINavigationController
+        public let controller: UINavigationController
         
         // MARK: Public methods
-        func run(controller: UIViewController, animated: Bool = true) {
+        public func run(controller: UIViewController, animated: Bool = true) {
             self.controller.setViewControllers([ controller ], animated: animated)
         }
-        func push(controller: UIViewController, animated: Bool = true) {
+        public func push(controller: UIViewController, animated: Bool = true) {
             self.controller.pushViewController(controller, animated: animated)
         }
-        func pop(animated: Bool = true) {
+        public func pop(animated: Bool = true) {
             self.controller.popViewController(animated: animated)
         }
-        func popToRoot(animated: Bool = true) {
+        public func popToRoot(animated: Bool = true) {
             self.controller.popToRootViewController(animated: animated)
         }
     }
