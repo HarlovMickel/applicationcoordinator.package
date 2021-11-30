@@ -6,7 +6,6 @@
 //
 
 import UIKit
-import UIKitExtension
 
 // MARK: RouterProtocol protocol
 public protocol RouterProtocol {
@@ -54,7 +53,8 @@ extension RouterProtocol {
     
     public func run() {
         if let scene = UIApplication.shared.connectedScenes.first as? UIWindowScene {
-            scene.keyWindow?.rootViewController = controller
+            if #available(iOS 15.0, *) { scene.keyWindow?.rootViewController = controller }
+            else if let window = scene.windows.first { window.rootViewController = controller }
         }
     }
 }
